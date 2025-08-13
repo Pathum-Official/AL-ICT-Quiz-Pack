@@ -1,45 +1,415 @@
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    overflow: hidden; /* පිටුවෙන් පිටතට යන animation පාලනයට */
-    background-color: #e0f7fa; /* ලා නිල් පැහැති පසුබිමක් */
+    font-family: 'Inter', sans-serif;
+    background-color: #f0f4f8; /* Light blue-gray background */
+    min-height: 100vh; /* Ensure body takes full viewport height */
+    padding-top: 2rem; /* Add some padding at the top */
+    padding-bottom: 2rem; /* Add some padding at the bottom */
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    overflow-y: auto; /* Allow vertical scroll for body if content overflows */
 }
 
-.animation-container {
-    width: 90vw; /* viewport width */
-    height: 80vh; /* viewport height */
-    position: relative;
-    border: 2px solid #a8dadc;
+.container {
+    max-width: 900px;
+    margin: 2rem auto; /* Ensures centering and proper margin */
+    padding: 2rem;
     background-color: #ffffff;
-    overflow: hidden; /* container එකෙන් පිට පනින animation පාලනයට */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.8s ease-out;
+    min-height: 70vh; /* Ensure some height for content */
+    display: flex;
+    flex-direction: column;
+    /* Removed justify-content: center to allow content to push container height */
+    position: relative; /* For z-index of bubbles */
+    z-index: 10;
+    overflow-y: auto; /* Allows internal scrolling if quiz content is very long */
+    max-height: calc(100vh - 4rem); /* Limit container height to prevent overflow of the whole page */
 }
 
-/* බෝලය සඳහා Styles */
-.ball {
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in-down {
+    from { opacity: 0; transform: translateY(-50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce-in {
+    0% { transform: scale(0.9); opacity: 0; }
+    50% { transform: scale(1.05); opacity: 1; }
+    70% { transform: scale(0.95); }
+    100% { transform: scale(1); }
+}
+
+@keyframes zoom-in {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Option Button Styling */
+.option-button {
+    transition: all 0.2s ease;
+}
+.option-button:hover:not(.selected):not(.correct):not(.incorrect) {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+.option-button.selected {
+    border-color: #3b82f6; /* Blue-500 */
+    background-color: #dbeafe; /* Blue-100 */
+    font-weight: 600;
+}
+.option-button.correct {
+    background-color: #d1fae5; /* Green-100 */
+    border-color: #10b981; /* Green-500 */
+    color: #065f46; /* Green-800 */
+    animation: pulseCorrect 0.5s ease-out;
+}
+.option-button.incorrect {
+    background-color: #fee2e2; /* Red-100 */
+    border-color: #ef4444; /* Red-500 */
+    color: #991b1b; /* Red-800 */
+}
+@keyframes pulseCorrect {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+.explanation-section {
+    background-color: #ecf3f9; /* Light blue-gray */
+    border-left: 4px solid #3b82f6; /* Blue-500 */
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-top: 1.5rem;
+    animation: slideInUp 0.6s ease-out;
+}
+@keyframes slideInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.feedback-message {
+    margin-top: 1rem;
+    font-weight: 600;
+    padding: 0.75rem;
+    border-radius: 8px;
+    text-align: center;
+    animation: fadeIn 0.5s ease-out;
+}
+.feedback-correct {
+    background-color: #d1fae5; /* Green-100 */
+    color: #065f46; /* Green-800 */
+}
+.feedback-incorrect {
+    background-color: #fee2e2; /* Red-100 */
+    color: #991b1b; /* Red-800 */
+}
+.navigation-buttons button {
+    transition: all 0.2s ease;
+}
+.navigation-buttons button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.navigation-buttons button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+.end-summary-section {
+    animation: fadeIn 1s ease-out;
+}
+.result-item {
+    background-color: #f8fafc;
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+.result-item:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+.result-item .correct-answer {
+    color: #10b981; /* Green-500 */
+    font-weight: 600;
+}
+.result-item .incorrect-answer {
+    color: #ef4444; /* Red-500 */
+    font-weight: 600;
+}
+.result-item .user-answer-selected {
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+/* New styles for score animation */
+.score-pulse {
+    animation: scorePulse 0.3s ease-in-out;
+}
+@keyframes scorePulse {
+    0% { transform: scale(1); color: inherit; }
+    50% { transform: scale(1.1); color: #22c55e; } /* Green for positive, red for negative */
+    100% { transform: scale(1); color: inherit; }
+}
+.score-pulse-negative {
+     animation: scorePulseNegative 0.3s ease-in-out;
+}
+@keyframes scorePulseNegative {
+    0% { transform: scale(1); color: inherit; }
+    50% { transform: scale(1.1); color: #ef4444; } /* Red for negative */
+    100% { transform: scale(1); color: inherit; }
+}
+
+/* Question highlighting */
+.question-highlight {
+    background-color: #e0f2fe; /* Light blue background */
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin-bottom: 2rem;
+    border: 1px solid #93c5fd; /* Blue-300 border */
+    animation: slideInLeft 0.5s ease-out;
+}
+
+/* Question and Options transition animation */
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+.question-text.animate-in { animation: slideInLeft 0.5s ease-out forwards; }
+.options-container.animate-in .option-button { animation: slideInRight 0.6s ease-out forwards; opacity: 0; }
+.options-container.animate-in .option-button:nth-child(1) { animation-delay: 0.1s; }
+.options-container.animate-in .option-button:nth-child(2) { animation-delay: 0.2s; }
+.options-container.animate-in .option-button:nth-child(3) { animation-delay: 0.3s; }
+.options-container.animate-in .option-button:nth-child(4) { animation-delay: 0.4s; }
+.options-container.animate-in .option-button:nth-child(5) { animation-delay: 0.5s; }
+
+
+/* Mobile specific adjustments */
+@media (max-width: 640px) {
+    .container {
+        margin: 0.5rem auto; /* Smaller margin */
+        padding: 0.75rem; /* Smaller padding */
+        min-height: 95vh; /* Take more height on small screens */
+        max-height: calc(100vh - 1rem); /* Adjust max-height for mobile padding */
+    }
+    #main-menu-section h1 {
+        font-size: 2.2rem; /* Smaller heading */
+        margin-bottom: 1rem;
+    }
+    #main-menu-section p {
+        font-size: 1rem; /* Smaller paragraph */
+        margin-bottom: 1.5rem;
+    }
+    .lesson-button {
+        font-size: 0.9rem; /* Smaller button text */
+        padding: 0.8rem 1rem;
+    }
+
+    .intro-section h1 {
+        font-size: 2.2rem; /* Smaller heading */
+        margin-bottom: 1rem;
+    }
+    .intro-section p {
+        font-size: 1rem; /* Smaller paragraph */
+        margin-bottom: 1.5rem;
+    }
+    .intro-section .bg-blue-50 {
+        padding: 1rem; /* Smaller padding for features box */
+        margin-bottom: 1.5rem;
+    }
+    .intro-section .bg-blue-50 h3 {
+        font-size: 1.5rem; /* Smaller feature heading */
+    }
+    .intro-section .bg-blue-50 ul li {
+        font-size: 0.9rem; /* Smaller feature text */
+    }
+    .intro-section .form-checkbox {
+        height: 1rem; /* Smaller checkbox */
+        width: 1rem;
+    }
+    .intro-section label {
+        font-size: 0.9rem; /* Smaller label */
+    }
+    .intro-section #start-quiz-button {
+        font-size: 1.2rem; /* Smaller button */
+        padding: 0.8rem 1.5rem;
+    }
+    .navigation-buttons {
+        flex-direction: column;
+        gap: 0.75rem; /* Smaller gap */
+    }
+    .navigation-buttons button,
+    .lifeline-button {
+        width: 100%;
+        font-size: 0.9rem; /* Smaller button text */
+        padding: 0.6rem;
+    }
+    .quiz-header h2, .quiz-header p {
+        font-size: 1rem; /* Smaller header text */
+    }
+    .question-text {
+        font-size: 1rem; /* Smaller question text */
+        padding: 1rem; /* Smaller padding for highlight */
+    }
+    .option-button {
+        padding: 0.7rem;
+        font-size: 0.85rem;
+    }
+    .explanation-section {
+        padding: 1rem; /* Smaller explanation section */
+    }
+    .explanation-section h3 {
+        font-size: 1rem;
+    }
+    .explanation-section p {
+        font-size: 0.85rem;
+    }
+    .lifeline-section {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .lifeline-cooldown-display {
+        font-size: 0.75rem;
+    }
+}
+
+/* Styles to correctly display sup and sub tags */
+sup {
+    vertical-align: super;
+    font-size: smaller;
+}
+
+sub {
+    vertical-align: sub;
+    font-size: smaller;
+}
+
+/* Background Bubbles Animation */
+.background-bubbles {
     position: absolute;
-    width: 80px;  /* බෝලයේ දෘශ්‍ය ප්‍රමාණය */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1; /* Behind the quiz container */
+}
+
+.bubble {
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 20px;
+    height: 20px;
+    background: rgba(139, 192, 237, 0.2); /* Light blue with transparency */
+    animation: animateBubbles 25s linear infinite;
+    bottom: -150px; /* Start below the viewport */
+    border-radius: 50%;
+    opacity: 0; /* Initially hidden */
+}
+
+.bubble:nth-child(1) {
+    left: 25%;
+    width: 80px;
     height: 80px;
-    background-image: url('ball_sprite.gif'); /* ඔබේ ball JPG file නම */
-    background-size: 100% 100%; /* රූපය div එකට ගැලපීමට */
-    bottom: 5%; /* බිම සිට ටිකක් උඩින් */
-    left: -100px; /* ආරම්භක ස්ථානය: වමෙන් පිටත */
-    z-index: 2; /* බලු පැටියාට උඩින් පෙන්වීමට */
-    transform-origin: 50% 50%; /* මැදින් කැරකීමට */
+    animation-delay: 0s;
+    animation-duration: 10s;
+}
+.bubble:nth-child(2) {
+    left: 10%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 2s;
+    animation-duration: 12s;
+}
+.bubble:nth-child(3) {
+    left: 70%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 4s;
+    animation-duration: 15s;
+}
+.bubble:nth-child(4) {
+    left: 40%;
+    width: 60px;
+    height: 60px;
+    animation-delay: 0s;
+    animation-duration: 18s;
+}
+.bubble:nth-child(5) {
+    left: 65%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 0s;
+    animation-duration: 10s;
+}
+.bubble:nth-child(6) {
+    left: 75%;
+    width: 110px;
+    height: 110px;
+    animation-delay: 3s;
+    animation-duration: 16s;
+}
+.bubble:nth-child(7) {
+    left: 35%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 7s;
+    animation-duration: 20s;
+}
+.bubble:nth-child(8) {
+    left: 50%;
+    width: 25px;
+    height: 25px;
+    animation-delay: 10s;
+    animation-duration: 14s;
+}
+.bubble:nth-child(9) {
+    left: 20%;
+    width: 15px;
+    height: 15px;
+    animation-delay: 12s;
+    animation-duration: 17s;
+}
+.bubble:nth-child(10) {
+    left: 85%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 9s;
+    animation-duration: 11s;
 }
 
-
-/* බලු පැටියා සඳහා Styles */
-.puppy {
-    position: absolute;
-    width: 180px; /* බලු පැටියාගේ දෘශ්‍ය ප්‍රමාණය */
-    height: 180px;
-    background-image: url('puppy_sprite.gif'); /* ඔබේ puppy JPG file නම */
-    background-size: 100% 100%; /* රූපය div එකට ගැලපීමට */
-    bottom: 10%; /* බිම සිට ටිකක් උඩින්, බෝලයට වඩා පහලින් */
-    left: -200px; /* ආරම්භක ස්ථානය: වමෙන් පිටත */
-    z-index: 1; /* බෝලයට යටින් පෙන්වීමට */
+@keyframes animateBubbles {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+        border-radius: 0;
+    }
+    10% {
+        opacity: 1; /* Become visible after a short delay */
+        border-radius: 50%;
+    }
+    100% {
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+    }
 }
