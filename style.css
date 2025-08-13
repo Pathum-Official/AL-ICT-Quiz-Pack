@@ -1,0 +1,45 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden; /* පිටුවෙන් පිටතට යන animation පාලනයට */
+    background-color: #e0f7fa; /* ලා නිල් පැහැති පසුබිමක් */
+}
+
+.animation-container {
+    width: 90vw; /* viewport width */
+    height: 80vh; /* viewport height */
+    position: relative;
+    border: 2px solid #a8dadc;
+    background-color: #ffffff;
+    overflow: hidden; /* container එකෙන් පිට පනින animation පාලනයට */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* බෝලය සඳහා Styles */
+.ball {
+    position: absolute;
+    width: 80px;  /* බෝලයේ දෘශ්‍ය ප්‍රමාණය */
+    height: 80px;
+    background-image: url('ball_sprite.gif'); /* ඔබේ ball JPG file නම */
+    background-size: 100% 100%; /* රූපය div එකට ගැලපීමට */
+    bottom: 5%; /* බිම සිට ටිකක් උඩින් */
+    left: -100px; /* ආරම්භක ස්ථානය: වමෙන් පිටත */
+    z-index: 2; /* බලු පැටියාට උඩින් පෙන්වීමට */
+    transform-origin: 50% 50%; /* මැදින් කැරකීමට */
+}
+
+
+/* බලු පැටියා සඳහා Styles */
+.puppy {
+    position: absolute;
+    width: 180px; /* බලු පැටියාගේ දෘශ්‍ය ප්‍රමාණය */
+    height: 180px;
+    background-image: url('puppy_sprite.gif'); /* ඔබේ puppy JPG file නම */
+    background-size: 100% 100%; /* රූපය div එකට ගැලපීමට */
+    bottom: 10%; /* බිම සිට ටිකක් උඩින්, බෝලයට වඩා පහලින් */
+    left: -200px; /* ආරම්භක ස්ථානය: වමෙන් පිටත */
+    z-index: 1; /* බෝලයට යටින් පෙන්වීමට */
+}
