@@ -1,17 +1,223 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="si">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Ball & Puppy Animation</title>
+    <title>ICT MCQ පෙරහුරු විභාගය</title>
+    <link rel="icon" href="./icon.jpg" type="image/x-icon">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body>
-    <div class="animation-container">
-        <div class="ball"></div>
-        <div class="puppy"></div>
+<body class="bg-gray-100 min-h-screen py-8 relative overflow-x-hidden">
+    <!-- Background animation bubbles -->
+    <div class="background-bubbles">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
     </div>
 
-    <script src="script.js"></script>
+    <div id="quiz-container" class="container w-full px-4 sm:px-6 lg:px-8 relative z-10">
+        <!-- Main Menu Section -->
+        <div id="main-menu-section" class="flex flex-col items-center justify-center text-center h-full">
+            <h1 class="text-4xl font-extrabold text-blue-700 mb-8 animate-fade-in-down">
+                ICT MCQ පෙරහුරු විභාගය 🎓
+            </h1>
+            <p class="text-xl text-gray-700 mb-10 animate-fade-in">
+                ඔබට පෙරහුරු වීමට අවශ්‍ය පාඩම තෝරන්න.<br><small>powerd by : <a href="https://www.youtube.com/@Pathum-Apekshana" class="text-blue-600 hover:underline">Pathum Apekshana</a></small>
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-4xl animate-slide-up">
+                <!-- Lesson Buttons -->
+                <!-- Lesson 1 -->
+                <button class="lesson-button bg-gradient-to-br from-blue-500 to-blue-700 text-white py-4 px-6 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300 flex items-center justify-center space-x-3" data-lesson-id="1">
+                    <i class="fas fa-lightbulb text-2xl"></i>
+                    <span>1. තොරතුරු හා සන්නිවේදන තාක්ෂණය පිළිබඳ සංකල්ප</span>
+                </button>
+                <!-- Lesson 2 -->
+                <button class="lesson-button bg-gradient-to-br from-purple-500 to-purple-700 text-white py-4 px-6 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300 flex items-center justify-center space-x-3" data-lesson-id="2">
+                    <i class="fas fa-desktop text-2xl"></i>
+                    <span>2. පරිගණකය හැඳින්වීම</span>
+                </button>
+                <!-- Lesson 3 -->
+                <button class="lesson-button bg-gradient-to-br from-green-500 to-green-700 text-white py-4 px-6 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300 flex items-center justify-center space-x-3" data-lesson-id="3">
+                    <i class="fas fa-calculator text-2xl"></i>
+                    <span>3. දත්ත නිරූපණය</span>
+                </button>
+                <!-- Lesson 4 -->
+                <button class="lesson-button bg-gradient-to-br from-red-500 to-red-700 text-white py-4 px-6 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300 flex items-center justify-center space-x-3" data-lesson-id="4">
+                    <i class="fas fa-microchip text-2xl"></i>
+                    <span>4. අංකිත පරිපථවල මූලිකාංග</span>
+                </button>
+                <!-- Lesson 5 -->
+                <button class="lesson-button bg-gradient-to-br from-yellow-500 to-yellow-700 text-white py-4 px-6 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300 flex items-center justify-center space-x-3" data-lesson-id="5">
+                    <i class="fas fa-cogs text-2xl"></i>
+                    <span>5. පරිගණක මෙහෙයුම් පද්ධති</span>
+                </button>
+                <!-- Lesson 6 -->
+                <button class="lesson-button bg-gradient-to-br from-teal-500 to-teal-700 text-white py-4 px-6 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300 flex items-center justify-center space-x-3" data-lesson-id="6">
+                    <i class="fas fa-network-wired text-2xl"></i>
+                    <span>6. දත්ත සන්නිවේදනය හා ජාලකරණය</span>
+                </button>
+                 <!-- Lesson 7 -->
+                <button class="lesson-button bg-gradient-to-br from-indigo-500 to-indigo-700 text-white py-4 px-6 rounded-xl font-bold text-text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300 flex items-center justify-center space-x-3" data-lesson-id="7">
+                    <i class="fas fa-project-diagram text-2xl"></i>
+                    <span>7. පද්ධති විශ්ලේෂණය හා සැලසුම</span>
+                </button>
+                <!-- Lesson 8 -->
+                <button class="lesson-button bg-gradient-to-br from-pink-500 to-pink-700 text-white py-4 px-6 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300 flex items-center justify-center space-x-3" data-lesson-id="8">
+                    <i class="fas fa-database text-2xl"></i>
+                    <span>8. දත්ත සමුදාය කළමනාකරණය</span>
+                </button>
+                <!-- Lesson 9 -->
+                <button class="lesson-button bg-gradient-to-br from-orange-500 to-orange-700 text-white py-4 px-6 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300 flex items-center justify-center space-x-3" data-lesson-id="9">
+                    <i class="fas fa-code text-2xl"></i>
+                    <span>9. ක්‍රමලේඛකරණය</span>
+                </button>
+                <!-- Lesson 10 -->
+                <button class="lesson-button bg-gradient-to-br from-cyan-500 to-cyan-700 text-white py-4 px-6 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300 flex items-center justify-center space-x-3" data-lesson-id="10">
+                    <i class="fas fa-globe text-2xl"></i>
+                    <span>10. වෙබ් අඩවි සංවර්ධනය</span>
+                </button>
+                <!-- Lesson 11 -->
+                <button class="lesson-button bg-gradient-to-br from-lime-500 to-lime-700 text-white py-4 px-6 rounded-xl font-bold text-lg shadow-lg hover:-shadow-xl transform hover:-translate-y-2 transition-all duration-300 flex items-center justify-center space-x-3" data-lesson-id="11">
+                    <i class="fas fa-wifi text-2xl"></i>
+                    <span>11. සර්ව විසිරි අන්තර්ජාලය / සබැඳි දේවල් අන්තර්ජාලය</span>
+                </button>
+                <!-- Lesson 12 -->
+                <button class="lesson-button bg-gradient-to-br from-fuchsia-500 to-fuchsia-700 text-white py-4 px-6 rounded-xl font-bold text-lg shadow-lg hover:-shadow-xl transform hover:-translate-y-2 transition-all duration-300 flex items-center justify-center space-x-3" data-lesson-id="12">
+                    <i class="fas fa-handshake text-2xl"></i>
+                    <span>12. ව්‍යාපාර තුළ තොරතුරු සන්නිවේදන තාක්ෂණය</span>
+                </button>
+                <!-- Lesson 13 -->
+                <button class="lesson-button bg-gradient-to-br from-rose-500 to-rose-700 text-white py-4 px-6 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300 flex items-center justify-center space-x-3" data-lesson-id="13">
+                    <i class="fas fa-lightbulb text-2xl"></i>
+                    <span>13. තොරතුරු සන්නිවේදන තාක්ෂණයේ නව නැඹුරු සහ අනාගත දිශානති</span>
+                </button>
+                <!-- All Lessons Combined Button -->
+                <button class="lesson-button bg-gradient-to-br from-gray-700 to-gray-900 text-white py-4 px-6 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300 flex items-center justify-center space-x-3 col-span-1 md:col-span-2 lg:col-span-3" data-lesson-id="all">
+                    <i class="fas fa-random text-2xl"></i>
+                    <span>සම්පූර්ණ විෂය නිර්දේශය (සියලු ප්‍රශ්න)</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Introduction Section (hidden by default) -->
+        <div id="intro-section" class="hidden flex flex-col items-center justify-center text-center h-full">
+            <h1 id="intro-lesson-title" class="text-4xl font-bold text-blue-700 mb-6 animate-pulse"></h1>
+            <p id="intro-lesson-description" class="text-xl text-gray-700 mb-8"></p>
+
+            <div class="bg-blue-50 p-6 rounded-xl shadow-inner mb-8 w-full md:w-2/3 lg:w-1/2 animate-fade-in-up">
+                <h3 class="text-2xl font-bold text-blue-800 mb-4">විශේෂාංග:</h3>
+                <ul class="text-left text-lg text-gray-700 space-y-3">
+                    <li class="flex items-center"><span class="text-blue-500 mr-2">✔️</span>සෑම නිවැරදි පිළිතුරකටම ලකුණු 2ක්!</li>
+                    <li class="flex items-center"><span class="text-red-500 mr-2">❌</span>වැරදි පිළිතුරකට ලකුණු 1ක් අඩු වේ.</li>
+                    <li class="flex items-center"><span class="text-green-500 mr-2">⏰</span>සෑම ප්‍රශ්නයකටම මිනිත්තු 2ක කාල සීමාවක්.</li>
+                    <li class="flex items-center"><span class="text-purple-500 mr-2">💡</span>වැරදි පිළිතුරු 2ක් ඉවත් කිරීමේ හැකියාව (මිනිත්තු 5ට වරක්).</li>
+                    <li class="flex items-center"><span class="text-yellow-500 mr-2">🔄</span>ප්‍රශ්න හා පිළිතුරු අහඹු ලෙස මාරු වේ.</li>
+                    <li class="flex items-center"><span class="text-indigo-500 mr-2">📊</span>අවසන් වර්තාවෙන් ඔබගේ ප්‍රගතිය විස්තරාත්මකව බලන්න.</li>
+                </ul>
+            </div>
+
+            
+
+            <button id="start-quiz-button" class="bg-blue-600 text-white py-4 px-8 rounded-full font-bold text-xl hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all duration-300 transform hover:scale-105 shadow-lg animate-bounce-in">
+                ආරම්භ කරන්න!
+            </button>
+             <button id="back-to-menu-button-intro" class="mt-4 bg-gray-300 text-gray-800 py-2 px-5 rounded-full font-semibold hover:bg-gray-400 focus:outline-none focus:ring-4 focus:ring-gray-300 transition-all duration-200 animate-fade-in">
+                <i class="fas fa-arrow-left mr-2"></i>ප්‍රධාන මෙනුවට
+            </button>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div id="loading-spinner" class="hidden flex justify-center items-center py-10 animate-fade-in h-full">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-4 border-blue-500"></div>
+            <p class="ml-4 text-blue-600 text-lg font-semibold">ප්‍රශ්න පත්‍රය සකසමින්...</p>
+        </div>
+
+        <!-- Quiz Section -->
+        <div id="quiz-section" class="hidden flex flex-col justify-between h-full">
+            <div class="flex flex-col sm:flex-row justify-between items-center mb-6 border-b pb-4 quiz-header animate-fade-in-down">
+                <h2 class="text-2xl font-bold text-gray-800">ප්‍රශ්නය <span id="current-question-number">1</span> / <span id="total-questions">10</span></h2>
+                <p class="text-xl font-semibold text-blue-600">ලකුණු: <span id="score-display">0</span></p>
+                <p class="text-xl font-semibold text-purple-600">වේලාව: <span id="timer-display">02:00</span></p>
+            </div>
+
+            <p id="question-text" class="text-gray-700 text-lg mb-6 leading-relaxed question-highlight animate-slide-in-left"></p>
+
+            <div id="options-container" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 animate-slide-in-right">
+                <!-- Options will be loaded here by JavaScript -->
+            </div>
+
+            <div class="lifeline-section flex flex-col sm:flex-row justify-center items-center gap-4 mb-6 animate-fade-in-up">
+                <button id="lifeline-button" class="bg-yellow-500 text-white py-3 px-6 rounded-xl font-semibold text-lg hover:bg-yellow-600 focus:outline-none focus:ring-4 focus:ring-yellow-300 transition-all duration-200" disabled>
+                    💡 වැරදි පිළිතුරු 2ක් ඉවත් කරන්න
+                </button>
+                <span id="lifeline-cooldown-display" class="text-gray-600 text-sm hidden">නැවත භාවිතා කිරීමට: 00:00</span>
+            </div>
+
+            <div id="feedback-message" class="hidden feedback-message animate-fade-in"></div>
+
+            <div id="explanation-section" class="hidden explanation-section animate-slide-in-up">
+                <h3 class="text-blue-700 text-lg font-bold mb-3">විවරණය:</h3>
+                <p id="explanation-text" class="text-gray-700 text-md leading-relaxed"></p>
+            </div>
+
+            <div class="navigation-buttons flex flex-col sm:flex-row justify-between items-center mt-8 gap-4 animate-fade-in-up">
+                <button id="prev-button" class="bg-gray-300 text-gray-800 py-3 px-6 rounded-xl font-semibold text-lg hover:bg-gray-400 focus:outline-none focus:ring-4 focus:ring-gray-300 transition-all duration-200" disabled>
+                    <i class="fas fa-arrow-left mr-2"></i>පසු පසට යැමට
+                </button>
+                 <button id="end-quiz-button" class="bg-red-500 text-white py-3 px-6 rounded-xl font-semibold text-lg hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-red-300 transition-all duration-200">
+                    <i class="fas fa-flag-checkered mr-2"></i>අවසන් කිරීමට
+                </button>
+                <button id="next-button" class="bg-blue-600 text-white py-3 px-6 rounded-xl font-semibold text-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all duration-200" disabled>
+                    ඉදිරියට යමට<i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- End Summary Section -->
+        <div id="end-summary-section" class="hidden end-summary-section h-full">
+            <h2 class="text-3xl font-bold text-center text-blue-700 mb-6 animate-zoom-in">විභාගය අවසන්! 🎉</h2>
+            <div class="bg-blue-50 p-6 rounded-xl text-center mb-8 shadow-inner animate-fade-in-up">
+                <h3 class="text-2xl font-bold text-blue-800 mb-3">ඔබගේ ප්‍රතිඵල:</h3>
+                <p class="text-lg text-gray-700">නිවැරදි පිළිතුරු සංඛ්‍යාව: <span id="correct-answers-count" class="font-bold text-green-600"></span></p>
+                <p class="text-lg text-gray-700">වැරදි පිළිතුරු සංඛ්‍යාව: <span id="incorrect-answers-count" class="font-bold text-red-600"></span></p>
+                <p class="text-lg text-gray-700">පිළිතුරු නොදුන් ප්‍රශ්න: <span id="unanswered-faced-count" class="font-bold text-yellow-600"></span></p>
+                <p class="text-lg text-gray-700">මුහුණ දුන් මුළු ප්‍රශ්න: <span id="attempted-questions-count" class="font-bold text-blue-600"></span></p>
+                <p class="text-lg text-gray-700">සාර්ථකත්වයේ ප්‍රතිශතය: <span id="success-percentage" class="font-bold text-purple-600"></span>%</p>
+                <p class="text-lg text-gray-700">විභාගය අවසන් කිරීමේ ප්‍රතිශතය: <span id="completion-percentage" class="font-bold text-indigo-600"></span>%</p>
+                <p class="text-2xl text-gray-800 mt-4">ලබාගත් මුළු ලකුණු: <span id="final-score" class="font-bold text-3xl text-green-700"></span></p>
+            </div>
+
+            <h3 class="text-2xl font-bold text-gray-800 mb-4 border-b pb-2 animate-fade-in">මුහුණ දුන් සියලුම ප්‍රශ්න සමාලෝචනය:</h3>
+            <div id="review-questions-container" class="animate-fade-in">
+                <!-- Reviewed questions will be loaded here -->
+            </div>
+
+            <button id="restart-quiz-button" class="mt-8 w-full bg-green-600 text-white py-3 px-6 rounded-xl font-semibold text-lg hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-green-300 transition-all duration-200 animate-bounce-in">
+                <i class="fas fa-redo-alt mr-2"></i>නැවත ආරම්භ කිරීමට
+            </button>
+             <button id="back-to-menu-button-summary" class="mt-4 w-full bg-gray-300 text-gray-800 py-2 px-5 rounded-full font-semibold hover:bg-gray-400 focus:outline-none focus:ring-4 focus:ring-gray-300 transition-all duration-200 animate-fade-in">
+                <i class="fas fa-arrow-left mr-2"></i>ප්‍රධාන මෙනුවට
+            </button>
+        </div>
+    </div>
+
+    <!-- Main JavaScript file -->
+    <script src="script.js" type="module"></script>
 </body>
 </html>
